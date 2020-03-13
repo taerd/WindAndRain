@@ -17,6 +17,7 @@ namespace WindAndRain
         public int DropD { get; set; }
         public int X { get; private set; }
         public int Y { get; private set; }
+        static public int dx { get; set; }
         private static Random rand = null;
         private Thread t;
         public Drop(Rectangle r)
@@ -49,6 +50,18 @@ namespace WindAndRain
             {
                 Thread.Sleep(10);
                 Y += 1;
+                if(dx != 0)
+                {
+                    X += dx;
+                    if (X < 0)
+                    {
+                        X = width - 1;
+                    }
+                    if (X > width)
+                    {
+                        X = 1;
+                    }
+                }
             }
         }
         public void Stop()

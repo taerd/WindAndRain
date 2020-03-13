@@ -27,7 +27,7 @@ namespace WindAndRain
         {
             while (!stop)
             {
-                Thread.Sleep(20);
+                Thread.Sleep(150);
                 a.Start();
             }
         }
@@ -47,13 +47,14 @@ namespace WindAndRain
 
         private void panelMain_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if(e.Button == MouseButtons.Right)
+            {
+                stop = true;
+                Stop();
+            }
+            else if(e.Button == MouseButtons.Left)
             {
                 Start();
-            }
-            else
-            {
-                Stop();
             }
         }
         private void Start()
@@ -69,7 +70,43 @@ namespace WindAndRain
         private void Stop()
         {
             stop = true;
+            //a.Stop = true;
             a.Stop();
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            Drop.dx = trackBar1.Value - 5;
+        }
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch(e.KeyChar)
+            {
+                case ((char)Keys.A):
+                    label1.Text = "A/a pressed";
+                    break;
+                case ((char)Keys.D):
+                    label1.Text = "D/d pressed";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void trackBar1_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case (Keys.A):
+                    label1.Text = "A/a pressed";
+                    //меняем позицию танка
+                    break;
+                case (Keys.D):
+                    label1.Text = "D/d pressed";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
