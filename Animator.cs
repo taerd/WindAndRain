@@ -16,7 +16,8 @@ namespace WindAndRain
         private Thread t;
         private bool stop = false;
         private BufferedGraphics bg;
-        public int Lvl { get; set; }
+        private Pen pen = new Pen(Color.Black);
+        public int Lvl { get; set; }//speed of drawing and moving drop
         public Animator(Graphics g,Rectangle r)
         {
             Update(g, r);
@@ -41,6 +42,7 @@ namespace WindAndRain
             {
                 Graphics g = bg.Graphics;
                 g.Clear(Color.White);
+                DrawTank();
                 Monitor.Enter(drops);
                 int cnt = drops.Count;
                 for (int i = 0; i < cnt; i++)
@@ -73,6 +75,7 @@ namespace WindAndRain
                 t.Start();
             }
             var rect = new Rectangle(0, 0, width, height);
+            Drop.speed = Lvl;
             Drop d = new Drop(rect);
             d.Start();
             Monitor.Enter(drops);
@@ -89,7 +92,14 @@ namespace WindAndRain
             }
             drops.Clear();
             Monitor.Exit(drops);
+        } 
+        private void DrawTank()
+        {
+            Graphics g = bg.Graphics;
+            //фиксить заливку
+            g.FillRectangle(b, Tank.X, (int)((double)(Tank.Y + (double)( (height-Tank.Y) * (double)(1-(double)(Tank.Count / Tank.MaxCount) ) ) ) ), 10, (int)( (double)( (height - Tank.Y) * (double)(Tank.Count / Tank.MaxCount) ) ) );
+            //g.DrawRectangle(pen, Tank.X, (int)(0.85 * height), 10, (int)(0.15 * height));
+            g.DrawRectangle(pen, Tank.X, Tank.Y, 10, (int)(height - Tank.Y));
         }
-
     }
 }

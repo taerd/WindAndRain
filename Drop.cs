@@ -18,6 +18,7 @@ namespace WindAndRain
         public int X { get; private set; }
         public int Y { get; private set; }
         static public int dx { get; set; }
+        static public int speed { get; set; }
         private static Random rand = null;
         private Thread t;
         public Drop(Rectangle r)
@@ -48,8 +49,18 @@ namespace WindAndRain
         {
             while(!stop && Y < height)
             {
-                Thread.Sleep(10);
+                Thread.Sleep(speed);
                 Y += 1;
+                if(Math.Abs(X-Tank.X) < DropD && Math.Abs(Y-Tank.Y) < 2)
+                {
+                    Y = height;
+                    Tank.Count += 1;
+                    if (Tank.Count == Tank.MaxCount)
+                    {
+                        Tank.Count = 0;
+                        //something do
+                    }
+                }
                 if(dx != 0)
                 {
                     X += dx;

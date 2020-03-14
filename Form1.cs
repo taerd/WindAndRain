@@ -20,7 +20,11 @@ namespace WindAndRain
         {
             InitializeComponent();
             a = new Animator(panelMain.CreateGraphics(), panelMain.ClientRectangle);
-            a.Lvl = 30;
+            a.Lvl = 30;//speed of drawing //bigger-more slowly //
+            Tank.X = (int)panelMain.Width / 2;
+            Tank.Y = (int)(panelMain.Height- panelMain.Height / 8);
+            Tank.Count = 0;
+            Tank.MaxCount = 10;
         }
 
         private void Move()
@@ -78,31 +82,37 @@ namespace WindAndRain
         {
             Drop.dx = trackBar1.Value - 5;
         }
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            switch(e.KeyChar)
-            {
-                case ((char)Keys.A):
-                    label1.Text = "A/a pressed";
-                    break;
-                case ((char)Keys.D):
-                    label1.Text = "D/d pressed";
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void trackBar1_KeyUp(object sender, KeyEventArgs e)
         {
-            switch (e.KeyData)
+
+        }
+
+        private void trackBar1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            label1.Text = $"{e.KeyChar}";
+            switch (e.KeyChar)
             {
-                case (Keys.A):
+                case ((char)ConsoleKey.A):
                     label1.Text = "A/a pressed";
-                    //меняем позицию танка
+                    if (Tank.X <= 10)
+                    {
+                        Tank.X = panelMain.Width - 10;
+                    }
+                    else
+                    {
+                        Tank.X -= 2;
+                    }
                     break;
-                case (Keys.D):
+                case ((char)ConsoleKey.D):
                     label1.Text = "D/d pressed";
+                    if (panelMain.Width - Tank.X <= 10)
+                    {
+                        Tank.X = 10;
+                    }
+                    else
+                    {
+                        Tank.X += 2;
+                    }
                     break;
                 default:
                     break;
