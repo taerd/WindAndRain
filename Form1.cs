@@ -47,6 +47,12 @@ namespace WindAndRain
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Stop();
+            //
+            /*
+            MouseEventArgs e1 = new MouseEventArgs(MouseButtons.Right,3,10,10,10);
+            panelMain_MouseClick(sender, e1);
+            */
+            //
         }
 
         private void panelMain_MouseClick(object sender, MouseEventArgs e)
@@ -81,11 +87,7 @@ namespace WindAndRain
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             Drop.dx = trackBar1.Value - 5;
-        }
-        private void trackBar1_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
+        }   
 
         private void trackBar1_KeyPress(object sender, KeyPressEventArgs e)
         {
