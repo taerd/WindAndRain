@@ -97,8 +97,9 @@ namespace WindAndRain
         {
             Graphics g = bg.Graphics;
             //фиксить заливку
-            g.FillRectangle(b, Tank.X, (int)((double)(Tank.Y + (double)( (height-Tank.Y) * (double)(1-(double)(Tank.Count / Tank.MaxCount) ) ) ) ), 10, (int)( (double)( (height - Tank.Y) * (double)(Tank.Count / Tank.MaxCount) ) ) );
-            //g.DrawRectangle(pen, Tank.X, (int)(0.85 * height), 10, (int)(0.15 * height));
+           // g.FillEllipse(b, Tank.X, Tank.Y + (height - Tank.Y) * (1 - (Tank.Count / Tank.MaxCount)), 5, 5);
+            g.FillRectangle(b, Tank.X, height - (Tank.Y+(height-Tank.Y)*(Tank.MaxCount - Tank.Count)/Tank.MaxCount), 10,Tank.Count*5);
+            //g.FillRectangle(b, Tank.X, Tank.Y - ((Tank.Y - height) * (Tank.Count/Tank.MaxCount)), 10, ((height-Tank.Y)-Tank.Count*2));
             g.DrawRectangle(pen, Tank.X, Tank.Y, 10, (int)(height - Tank.Y));
         }
     }

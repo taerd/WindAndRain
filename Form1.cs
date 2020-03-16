@@ -41,25 +41,20 @@ namespace WindAndRain
             if(this.WindowState != System.Windows.Forms.FormWindowState.Minimized && a!=null)
             {
                 a.Update(panelMain.CreateGraphics(), panelMain.ClientRectangle);
+                Tank.X = (int)panelMain.Width / 2;
+                Tank.Y = (int)(panelMain.Height - panelMain.Height / 8);
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Stop();
-            //
-            /*
-            MouseEventArgs e1 = new MouseEventArgs(MouseButtons.Right,3,10,10,10);
-            panelMain_MouseClick(sender, e1);
-            */
-            //
         }
 
         private void panelMain_MouseClick(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right)
             {
-                stop = true;
                 Stop();
             }
             else if(e.Button == MouseButtons.Left)
@@ -80,8 +75,13 @@ namespace WindAndRain
         private void Stop()
         {
             stop = true;
-            //a.Stop = true;
-            a.Stop();
+            if (t != null)
+            {
+                while (t.IsAlive)
+                {
+                    a.Stop();
+                }
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
