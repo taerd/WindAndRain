@@ -96,10 +96,7 @@ namespace WindAndRain
         private void DrawTank()
         {
             Graphics g = bg.Graphics;
-            //фиксить заливку
-           // g.FillEllipse(b, Tank.X, Tank.Y + (height - Tank.Y) * (1 - (Tank.Count / Tank.MaxCount)), 5, 5);
-            g.FillRectangle(b, Tank.X, height - (Tank.Y+(height-Tank.Y)*(Tank.MaxCount - Tank.Count)/Tank.MaxCount), 10,Tank.Count*5);
-            //g.FillRectangle(b, Tank.X, Tank.Y - ((Tank.Y - height) * (Tank.Count/Tank.MaxCount)), 10, ((height-Tank.Y)-Tank.Count*2));
+            g.FillRectangle(b, Tank.X, height-(int)((height-Tank.Y)*((float)Tank.Count/(float)Tank.MaxCount)) ,10,(int)((height-Tank.Y)*((float)Tank.Count/(float)Tank.MaxCount)));
             g.DrawRectangle(pen, Tank.X, Tank.Y, 10, (int)(height - Tank.Y));
         }
     }
